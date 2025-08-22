@@ -47,7 +47,10 @@ const ToDo = () => {
         </div>
 
         <span className="flex gap-1 text-3 text-[#6B7280] mt-10 mb-[24px] justify-center">
-          Powered by <span className="text-[#3B73ED]">Pinecone academy</span>
+          Powered by{" "}
+          <a href="#Pinecone" className="text-[#3B73ED]">
+            Pinecone academy
+          </a>
         </span>
       </div>
     </div>
