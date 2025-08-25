@@ -5,6 +5,7 @@ const ToDo = () => {
     taskName: "Meeting 1",
     isCompleted: true,
   };
+
   return (
     <div className="w-full h-screen bg-gray-100 pt-[60px] flex justify-center box-border">
       <div className="w-[377px] h-fit bg-white rounded-[16px] drop-shadow-[0_0_12px_rgba(0,0,0,0.16)] py-6 px-2 box-border inter">

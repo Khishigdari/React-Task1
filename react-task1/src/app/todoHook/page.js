@@ -40,7 +40,7 @@ const TodoPage = () => {
         {todos.map((todo, index) => {
           return (
             <div
-              className="flex gap-3 flex items-center"
+              className="flex gap-3 items-center"
               key={index + Math.random()}
             >
               <input
