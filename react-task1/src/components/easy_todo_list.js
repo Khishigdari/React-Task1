@@ -22,9 +22,7 @@ function ToDoList() {
     const newTodos = todos.filter((el, i) => index !== i);
     setTodos(newTodos);
   };
-  //   const handleCheckbox = () => {
-
-  //   }
+  const handleCheckbox = () => {};
 
   return (
     <div className="p-2 w-50 rounded-md bg-indigo-200">
@@ -39,7 +37,7 @@ function ToDoList() {
       {/* <ul></ul> */}
       {todos.map((todo, index) => (
         <div key={index}>
-          {/* <input type="checkbox" onClick={handleCheckbox}></input> */}
+          <input type="checkbox" onClick={handleCheckbox}></input>
           {todo} <button onClick={() => handleDeleteTodo(index)}>Delete</button>
         </div>
       ))}

@@ -21,8 +21,8 @@ function ToggleVisibility() {
       <button onClick={handleOnClick} className="p-1 bg-gray-50 rounded-md">
         Show/Hide Text
       </button>
-      {/* {hide && <p>Toggle me!</p>} */}
-      {hide ? <p>Toggle me!</p> : null}
+      {hide && <p>Toggle me!</p>}
+      {/* {hide ? <p>Toggle me!</p> : null} */}
     </div>
   );
 }
