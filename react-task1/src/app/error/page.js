@@ -1,10 +1,9 @@
 "use client";
-// import { Button } from "@/components";
+import { Button } from "@/components";
 import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 
 const Home = () => {
-  // let currentIndex = 0;
+  const currentIndex = 0;
   const [inputValue, setInputValue] = useState("");
   const [todos, setTodos] = useState([]);
   const [filterStatus, setFIlterStatus] = useState("all");
@@ -23,15 +22,16 @@ const Home = () => {
   };
 
   const handleAddTodo = () => {
-    setTodos([...todos, { title: inputValue, isDone: false, id: uuidv4() }]); // object array bolgoh heregtei uchraas {} dotor bichsen
+    setTodos([
+      ...todos,
+      { title: inputValue, isCompleted: false, id: uuidv4() },
+    ]); // object array bolgoh heregtei uchraas {} dotor bichsen
     setInputValue("");
-    // if (inputValue === "") return null;
   };
 
-  const handleOnChangeCheckbox = (event, id) => {
-    //id aar baridag bolson uchraas index bish id hereglene
-    const newTodos = todos.map((todo) => {
-      if (id === todo.id) todo.isDone = event.target.checked;
+  const handleOnChangeCheckbox = (event, index) => {
+    const newTodos = todos.map((todo, i) => {
+      if (i === index) todo.isDone = event.target.checked;
       return todo;
     });
     setTodos(newTodos);
@@ -42,13 +42,11 @@ const Home = () => {
     setTodos(newTodos);
   };
 
-  const handleClearCompleted = () => {
+  const handleClearAll = () => {
     // inputValue = "";
     // setInputValue("");
-    const newTodos = todos.filter((todo, i) => {
-      return !todo.isDone;
-    });
-    setTodos(newTodos);
+    setTodos;
+    console.log("clicked");
   };
 
   const filteredTodos = todos.filter((todo) => {
@@ -56,8 +54,6 @@ const Home = () => {
     if (filterStatus === "active") return !todo.isDone;
     return todo.isDone;
   });
-
-  const isButtonDisabled = inputValue === ""; // <========== disable button
 
   // const handleCheckboxChange = (event) => {
   //   setIsChecked(event.target.checked);
@@ -71,7 +67,7 @@ const Home = () => {
   //   setTodos(!isCompleted);
   //     setTodos([{ isCompleted: true }]);
   //   }; // ===========
-  // console.log("TODOS", todos);
+  console.log("TODOS", todos);
   return (
     <div className="w-full h-screen bg-gray-100 pt-[60px] flex justify-center box-border">
       <div className="w-[377px] h-fit bg-white rounded-[16px] drop-shadow-[0_0_12px_rgba(0,0,0,0.16)] py-6 px-2 box-border inter">
@@ -89,7 +85,6 @@ const Home = () => {
               placeholder="Add a new task..."
             ></input>
             <button
-              disabled={isButtonDisabled} // <========== disable button
               onClick={handleAddTodo}
               className="bg-[#3C82F6] py-2 px-4 rounded-[6px] text-white mr-4 cursor-pointer"
             >
@@ -102,7 +97,33 @@ const Home = () => {
               <button
                 onClick={() => handleFilterStatus("all")}
                 className={
-                  "py-1 px-3 ml-4 bg-[#F3F4F6]  rounded-[6px]  text-[#363636] " +
+                  "py-1 px-3 bg-[#F3F4F6]  rounded-[6px] ml-4 text-[#363636]" +
+                  `${
+                    filterStatus === "all"
+                      ? "!!bg-[#3C82F6] !text-white !cursor-pointer"
+                      : ""
+                  }`
+                }
+              >
+                {props.all}
+              </button>
+              <button
+                onClick={() => handleFilterStatus("all")}
+                className={
+                  "py-1 px-3 bg-[#F3F4F6]  rounded-[6px] ml-4 text-[#363636] " +
+                  `${
+                    filterStatus === "all"
+                      ? "!!bg-[#3C82F6] !text-white !cursor-pointer"
+                      : ""
+                  }`
+                }
+              >
+                {props.active}
+              </button>
+              <button
+                onClick={() => handleFilterStatus("all")}
+                className={
+                  "py-1 px-3 bg-[#F3F4F6]  rounded-[6px] ml-4 text-[#363636] " +
                   `${
                     filterStatus === "all"
                       ? "!bg-[#3C82F6] !text-white !cursor-pointer"
@@ -110,33 +131,7 @@ const Home = () => {
                   }`
                 }
               >
-                All
-              </button>
-              <button
-                onClick={() => handleFilterStatus("active")}
-                className={
-                  "py-1 px-3 bg-[#F3F4F6]  rounded-[6px]  text-[#363636] " +
-                  `${
-                    filterStatus === "active"
-                      ? "!bg-[#3C82F6] !text-white !cursor-pointer"
-                      : ""
-                  }`
-                }
-              >
-                Active
-              </button>
-              <button
-                onClick={() => handleFilterStatus("completed")}
-                className={
-                  "py-1 px-3 bg-[#F3F4F6]  rounded-[6px]  text-[#363636] " +
-                  `${
-                    filterStatus === "completed"
-                      ? "!bg-[#3C82F6] !text-white !cursor-pointer"
-                      : ""
-                  }`
-                }
-              >
-                Completed
+                {props.completed}
               </button>
             </div>
           </div>
@@ -159,7 +154,7 @@ const Home = () => {
                   className="w-5 h-5 line-through"
                 /> */}
                 <input
-                  onChange={(event) => handleOnChangeCheckbox(event, todo.id)}
+                  onChange={(event) => handleOnChangeCheckbox(event, index)}
                   //   onChange={handleChange} // <========== onchange hiine
                   //   checked={todo.isCompleted}
                   type="checkbox"
@@ -167,11 +162,6 @@ const Home = () => {
                   defaultChecked={todo.isDone}
                 />
                 {/* <input type="checkbox" onClick={handleCheckbox}></input> */}
-                {/* <div
-                  className='`${
-                    filterStatus === "completed" ? "line-through" : ""}`'
-                ></div> */}
-                {/* {!todo.isDone ? style(text-decoration: "line-through") : todo.title} */}
                 {todo.title}{" "}
                 <button
                   onClick={() => handleDeleteTodo(index)}
@@ -191,13 +181,12 @@ const Home = () => {
               <div className="mt-5 mb-4 w-[333px] h-[1px] mx-4 border[1px] bg-[#E4E4E7]"></div>
               <div className="flex justify-between mr-4 items-center">
                 <div className="text-[#6B7280] text-[14px] mx-4">
-                  {todos.filter((todo) => todo.isDone === true).length} of{" "}
-                  {todos.length} tasks completed
+                  {currentIndex} of {todos.length} tasks completed
                   {/* 1 of 2 tasks
                   completed */}
                 </div>
                 <button
-                  onClick={handleClearCompleted}
+                  onClick={handleClearAll}
                   className="text-[#EF4444] text-[14px] cursor-pointer"
                 >
                   Clear completed

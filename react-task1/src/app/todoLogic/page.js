@@ -39,12 +39,21 @@ const Home = () => {
   });
 
   return (
-    <div>
-      <div>
-        <input onChange={handleOnChange} type="text" />
-        <button onClick={handleAddTodo}>add</button>
-      </div>
+    <div className="w-fit">
       <div className="flex gap-2">
+        <input
+          onChange={handleOnChange}
+          type="text"
+          placeholder="Type here..."
+        />
+        <button
+          onClick={handleAddTodo}
+          className="bg-[#3C82F6] py-2 px-4 rounded-[6px] text-white mr-4 cursor-pointer"
+        >
+          add
+        </button>
+      </div>
+      <div className="flex gap-2 mt-4">
         <button
           onClick={() => handleFilterStatus("all")}
           className={
