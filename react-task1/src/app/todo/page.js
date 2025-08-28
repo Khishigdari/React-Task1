@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const Home = () => {
-  // let currentIndex = 0;
   const [inputValue, setInputValue] = useState("");
   const [todos, setTodos] = useState([]);
   const [filterStatus, setFIlterStatus] = useState("all");
